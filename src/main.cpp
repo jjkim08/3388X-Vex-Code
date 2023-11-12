@@ -141,7 +141,7 @@ void usercontrol(void) {
       clawDestination = 0;
     }
 
-    spinClawMotor(); // testing more github
+    spinClawMotor();
 
     ArmMotor.spin(vex::forward, (r2+l2)*3, voltageUnits::volt);
 
