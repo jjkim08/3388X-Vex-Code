@@ -27,7 +27,7 @@ competition Competition;
 
 // define your global instances of motors and other devices here
 
-int clawMotorPosition = 0; // setting default position of claw motor
+int clawMotorPosition = 65; // setting default position of claw motor
 int clawDestination = 0; // destination of claw motor
 
 void spinClawMotor(){
@@ -135,9 +135,9 @@ void usercontrol(void) {
     int r2 = Controller1.ButtonR2.pressing();
     int l2 = -Controller1.ButtonL2.pressing();
 
-    if (clawDestination == 0 && r1){
+    if (clawDestination == 0 && l1){
       clawDestination = 65;
-    } else if (clawDestination == 65 && l1){
+    } else if (clawDestination == 65 && r1){
       clawDestination = 0;
     }
 
