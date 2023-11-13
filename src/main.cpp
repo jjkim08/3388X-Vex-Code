@@ -27,21 +27,6 @@ competition Competition;
 
 // define your global instances of motors and other devices here
 
-int clawMotorPosition = 65; // setting default position of claw motor
-int clawDestination = 0; // destination of claw motor
-
-void spinClawMotor(){
-  if (clawMotorPosition == clawDestination) ClawMotor.spin(vex::forward, 0, voltageUnits::volt);;
-
-  if (clawDestination > clawMotorPosition){
-    ClawMotor.spin(vex::forward, 7, voltageUnits::volt);
-    clawMotorPosition++;
-  } else if (clawDestination < clawMotorPosition){
-    ClawMotor.spin(vex::forward, -7, voltageUnits::volt);
-    clawMotorPosition--;
-  }
-}
-
 directionType findDirFromVolt(int volts){
   if (volts >= 0) return vex::forward;
   else return vex::reverse;
@@ -115,9 +100,6 @@ void usercontrol(void) {
     // Axis 3-4 are left joystick, 3 is up and down while 4 is left to right
     // Axis 1-2 are right joystick, 2 is up and down while 1 is left to right
 
-    Brain.Screen.clearLine();
-    Brain.Screen.print(clawMotorPosition);
-
     double turnVolts = valueNotZero(Controller1.Axis1.position(percent) * 0.075 / 2, signs(Controller1.Axis4.position(percent)) * max(0, (int)(abs(Controller1.Axis4.position(percent)) - 75)) * 0.2);
     double forwardVolts = Controller1.Axis3.position(percent) * 0.075;
 
@@ -129,21 +111,15 @@ void usercontrol(void) {
 
     // claw and arm movement
 
-    int r1 = Controller1.ButtonR1.pressing();
-    int l1 = -Controller1.ButtonL1.pressing();
+    int r1 = -Controller1.ButtonR1.pressing();
+    int l1 = Controller1.ButtonL1.pressing();
 
     int r2 = Controller1.ButtonR2.pressing();
     int l2 = -Controller1.ButtonL2.pressing();
 
-    if (clawDestination == 0 && l1){
-      clawDestination = 65;
-    } else if (clawDestination == 65 && r1){
-      clawDestination = 0;
-    }
+    ArmMotor.spin(vex::forward, (r2+l2)*231987349, voltageUnits::volt);
 
-    spinClawMotor();
-
-    ArmMotor.spin(vex::forward, (r2+l2)*3, voltageUnits::volt);
+    ClawMotor.spin(vex::forward, (r1+l1)*7, voltageUnits::volt);
 
     wait(20, msec); // Sleep the task for a short amount of time to
                     // prevent wasted resources.
