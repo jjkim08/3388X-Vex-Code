@@ -27,6 +27,21 @@ competition Competition;
 
 // define your global instances of motors and other devices here
 
+int clawMotorPosition = 65; // setting default position of claw motor
+int clawDestination = 0; // destination of claw motor
+
+void spinClawMotor(){
+  if (clawMotorPosition == clawDestination) ClawMotor.spin(vex::forward, 0, voltageUnits::volt);;
+  if (clawDestination > clawMotorPosition){
+    ClawMotor.spin(vex::forward, 7, voltageUnits::volt);
+    clawMotorPosition++;
+  } else if (clawDestination < clawMotorPosition){
+    ClawMotor.spin(vex::forward, -7, voltageUnits::volt);
+    clawMotorPosition--;
+  }
+}
+
+
 directionType findDirFromVolt(int volts){
   if (volts >= 0) return vex::forward;
   else return vex::reverse;
@@ -77,6 +92,44 @@ void pre_auton(void) {
 
 void autonomous(void) {
 
+
+  RightMotor.spin(vex::forward, 5, voltageUnits::volt);
+  LeftMotor.spin(vex::forward, 5, voltageUnits::volt);
+
+  wait(1, seconds);
+
+  RightMotor.spin(vex::forward, 0, voltageUnits::volt);
+  LeftMotor.spin(vex::forward, 0, voltageUnits::volt);
+
+  ClawMotor.spin(vex::forward, -7, voltageUnits::volt);
+
+  wait(1.5, seconds);
+
+  ClawMotor.spin(vex::forward, 0, voltageUnits::volt);
+
+  ArmMotor.spin(vex::forward, 231987349, voltageUnits::volt);
+
+  wait(2, seconds);
+
+  ArmMotor.spin(vex::forward, 0, voltageUnits::volt);
+
+  RightMotor.spin(vex::forward, 5, voltageUnits::volt);
+
+  wait(1, seconds);
+
+  RightMotor.spin(vex::forward, 5, voltageUnits::volt);
+  LeftMotor.spin(vex::forward, 5, voltageUnits::volt);
+
+  wait(1, seconds);
+
+  RightMotor.spin(vex::forward, 0, voltageUnits::volt);
+  LeftMotor.spin(vex::forward, 0, voltageUnits::volt);
+
+  ArmMotor.spin(vex::reverse, 231987349, voltageUnits::volt);
+
+  wait(2, seconds);
+
+  ArmMotor.spin(vex::reverse, 0, voltageUnits::volt);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -103,11 +156,11 @@ void usercontrol(void) {
     double turnVolts = valueNotZero(Controller1.Axis1.position(percent) * 0.075 / 2, signs(Controller1.Axis4.position(percent)) * max(0, (int)(abs(Controller1.Axis4.position(percent)) - 75)) * 0.2);
     double forwardVolts = Controller1.Axis3.position(percent) * 0.075;
 
-    int leftVolts = forwardVolts - turnVolts;
-    int rightVolts = forwardVolts + turnVolts;
+    int rightVolts = forwardVolts - turnVolts;
+    int leftVolts = forwardVolts + turnVolts;
 
-    LeftMotor.spin(vex::forward, leftVolts, voltageUnits::volt);
     RightMotor.spin(vex::forward, rightVolts, voltageUnits::volt);
+    LeftMotor.spin(vex::forward, leftVolts, voltageUnits::volt);
 
     // claw and arm movement
 

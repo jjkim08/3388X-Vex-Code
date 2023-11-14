@@ -16,8 +16,8 @@ controller Controller1 = controller(primary);
 motor ClawMotor = motor(PORT3, ratio18_1, false);
 motor ArmMotor = motor(PORT7, ratio18_1, false);
 
-motor LeftMotor = motor(PORT12, ratio18_1, true);
-motor RightMotor = motor(PORT19, ratio18_1, false);
+motor RightMotor = motor(PORT12, ratio18_1, true);
+motor LeftMotor = motor(PORT19, ratio18_1, false);
 
 // VEXcode generated functions
 
