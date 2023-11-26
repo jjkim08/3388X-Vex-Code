@@ -16,6 +16,8 @@
 // ArmMotor             motor         8               
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
+// testing 
+
 #include<bits/stdc++.h>
 #include "vex.h"
 
@@ -190,13 +192,14 @@ void usercontrol(void) {
 int main() {
   // Set up callbacks for autonomous and driver control periods.
   Competition.autonomous(autonomous);
-  Competition.drivercontrol(usercontrol);
 
   // Run the pre-autonomous function.
   pre_auton();
 
   // Run the autonomous function.
   autonomous();
+
+  Competition.drivercontrol(usercontrol);
 
   // Prevent main from exiting with an infinite loop.
   while (true) {
