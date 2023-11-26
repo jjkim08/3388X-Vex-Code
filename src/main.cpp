@@ -92,7 +92,6 @@ void pre_auton(void) {
 
 void autonomous(void) {
 
-
   RightMotor.spin(vex::forward, 5, voltageUnits::volt);
   LeftMotor.spin(vex::forward, 5, voltageUnits::volt);
 
@@ -161,6 +160,12 @@ void usercontrol(void) {
 
     RightMotor.spin(vex::forward, rightVolts, voltageUnits::volt);
     LeftMotor.spin(vex::forward, leftVolts, voltageUnits::volt);
+
+    // flywheel
+
+    int a = Controller1.ButtonA.pressing();
+
+    flyWheel.spin(vex::forward, a*500, velocityUnits::rpm);
 
     // claw and arm movement
 

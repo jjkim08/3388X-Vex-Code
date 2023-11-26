@@ -9,6 +9,7 @@ extern motor ClawMotor;
 extern motor ArmMotor;
 extern motor LeftMotor;
 extern motor RightMotor;
+extern motor flyWheel;
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.

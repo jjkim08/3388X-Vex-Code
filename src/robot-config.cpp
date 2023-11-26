@@ -15,6 +15,7 @@ controller Controller1 = controller(primary);
 // smartdrive Drivetrain= smartdrive(LeftDriveSmart, RightDriveSmart, TurnGyroSmart, 319.19, 320, 130, mm, 1);
 motor ClawMotor = motor(PORT3, ratio18_1, false);
 motor ArmMotor = motor(PORT7, ratio18_1, false);
+motor flyWheel = motor(PORT11, ratio6_1, true);
 
 motor RightMotor = motor(PORT12, ratio18_1, true);
 motor LeftMotor = motor(PORT19, ratio18_1, false);
