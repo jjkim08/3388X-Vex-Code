@@ -29,21 +29,6 @@ competition Competition;
 
 // define your global instances of motors and other devices here
 
-int clawMotorPosition = 65; // setting default position of claw motor
-int clawDestination = 0; // destination of claw motor
-
-void spinClawMotor(){
-  if (clawMotorPosition == clawDestination) ClawMotor.spin(vex::forward, 0, voltageUnits::volt);;
-  if (clawDestination > clawMotorPosition){
-    ClawMotor.spin(vex::forward, 7, voltageUnits::volt);
-    clawMotorPosition++;
-  } else if (clawDestination < clawMotorPosition){
-    ClawMotor.spin(vex::forward, -7, voltageUnits::volt);
-    clawMotorPosition--;
-  }
-}
-
-
 directionType findDirFromVolt(int volts){
   if (volts >= 0) return vex::forward;
   else return vex::reverse;
