@@ -93,44 +93,55 @@ void pre_auton(void) {
 /*---------------------------------------------------------------------------*/
 
 void autonomous(void) {
+  LeftMotor.spin(vex::forward);
+  RightMotor.spin(vex::forward);
 
-  RightMotor.spin(vex::forward, 5, voltageUnits::volt);
-  LeftMotor.spin(vex::forward, 5, voltageUnits::volt);
+  wait(3.1, seconds);
 
-  wait(1, seconds);
-
-  RightMotor.spin(vex::forward, 0, voltageUnits::volt);
   LeftMotor.spin(vex::forward, 0, voltageUnits::volt);
+  RightMotor.spin(vex::forward, 0, voltageUnits::volt);
 
-  ClawMotor.spin(vex::forward, -7, voltageUnits::volt);
+  ClawMotor.spin(vex::forward, -5, voltageUnits::volt);
 
-  wait(1.5, seconds);
+  wait(2, seconds);
 
   ClawMotor.spin(vex::forward, 0, voltageUnits::volt);
 
-  ArmMotor.spin(vex::forward, 231987349, voltageUnits::volt);
+  RightMotor.spinFor(2, seconds);
 
-  wait(2, seconds);
+
+
+  ArmMotor.spin(vex::forward, -10, voltageUnits::volt);
+
+  wait(1.5, seconds);
 
   ArmMotor.spin(vex::forward, 0, voltageUnits::volt);
 
-  RightMotor.spin(vex::forward, 5, voltageUnits::volt);
 
-  wait(1, seconds);
 
-  RightMotor.spin(vex::forward, 5, voltageUnits::volt);
-  LeftMotor.spin(vex::forward, 5, voltageUnits::volt);
-
-  wait(1, seconds);
-
-  RightMotor.spin(vex::forward, 0, voltageUnits::volt);
-  LeftMotor.spin(vex::forward, 0, voltageUnits::volt);
-
-  ArmMotor.spin(vex::reverse, 231987349, voltageUnits::volt);
+  ClawMotor.spin(vex::forward, 5, voltageUnits::volt);
 
   wait(2, seconds);
 
-  ArmMotor.spin(vex::reverse, 0, voltageUnits::volt);
+  ClawMotor.spin(vex::forward, 0, voltageUnits::volt);
+
+
+  RightMotor.spin(vex::forward, -5, voltageUnits::volt);
+
+  wait(0.65, seconds);
+
+  RightMotor.spin(vex::forward, 0, voltageUnits::volt);
+
+
+  RightMotor.spin(vex::forward, -5, voltageUnits::volt);
+  LeftMotor.spin(vex::forward, -5, voltageUnits::volt);
+
+  // wait(3.5, seconds);
+
+  // // LeftMotor.spin(vex::brakeType, 5, voltageUnits::volt);
+
+  // LeftMotor.spin(vex::forward, 0, voltageUnits::volt);
+  // RightMotor.spin(vex::forward, 0, voltageUnits::volt);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -167,7 +178,7 @@ void usercontrol(void) {
 
     int a = Controller1.ButtonA.pressing();
 
-    flyWheel.spin(vex::forward, a*500, velocityUnits::rpm);
+    flyWheel.spin(vex::forward, a*600, velocityUnits::rpm);
 
     // claw and arm movement
 
@@ -191,13 +202,13 @@ void usercontrol(void) {
 //
 int main() {
   // Set up callbacks for autonomous and driver control periods.
-  Competition.autonomous(autonomous);
-
   // Run the pre-autonomous function.
   pre_auton();
 
   // Run the autonomous function.
+  Competition.autonomous(autonomous);
   autonomous();
+
 
   Competition.drivercontrol(usercontrol);
 
