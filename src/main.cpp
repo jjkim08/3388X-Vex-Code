@@ -67,6 +67,10 @@ void pre_auton(void) {
   // Example: clearing encoders, setting servo positions, ...
 }
 
+void skills(void){
+  flyWheel.spin(vex::forward, 600, voltageUnits::volt);
+}
+
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
 /*                              Autonomous Task                              */
@@ -191,8 +195,8 @@ int main() {
   pre_auton();
 
   // Run the autonomous function.
-  Competition.autonomous(autonomous);
-  autonomous();
+  Competition.autonomous(skills);
+  skills();
 
 
   Competition.drivercontrol(usercontrol);
