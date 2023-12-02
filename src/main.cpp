@@ -81,7 +81,7 @@ void autonomous(void) {
   LeftMotor.spin(vex::forward);
   RightMotor.spin(vex::forward);
 
-  wait(3.1, seconds);
+  wait(3.6, seconds);
 
   LeftMotor.spin(vex::forward, 0, voltageUnits::volt);
   RightMotor.spin(vex::forward, 0, voltageUnits::volt);
@@ -111,7 +111,7 @@ void autonomous(void) {
   ClawMotor.spin(vex::forward, 0, voltageUnits::volt);
 
 
-  RightMotor.spin(vex::forward, -5, voltageUnits::volt);
+  RightMotor.spin(vex::forward, -8, voltageUnits::volt);
 
   wait(0.65, seconds);
 
